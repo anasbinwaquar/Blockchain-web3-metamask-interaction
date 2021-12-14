@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 contract kits{
@@ -17,6 +18,8 @@ contract kits{
         string dob;
         string martial_status;
         string sex;
+        // Account address needed for identification
+        address AccountAddress;
     }
 
     struct MedicalKit{
@@ -27,9 +30,9 @@ contract kits{
         string reason;
     }
 
-    function Add_Nurse(string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
+    function Add_Nurse(address AccAddress,string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
         nurse_count += 1;
-        Nurses[nurse_count]=Nurse(nurse_count, _firstName, _lastName, contact_num, emergency_num, _Address, email, dob, martial_status, sex);
+        Nurses[nurse_count]=Nurse(nurse_count, _firstName, _lastName, contact_num, emergency_num, _Address, email, dob, martial_status, sex, AccAddress);
     }
 
     function Get_MedicalKit(string memory Nurse_name, string memory time_taken, string memory reason, string memory nurse_email) public{
@@ -39,7 +42,7 @@ contract kits{
         MedicalKits[kit_count] = MedicalKit(kit_count, Nurse_name, nurse_email, time_taken, reason);
     }
 
-    function getAll_Appointments() public view returns (MedicalKit[] memory){
+    function getAll_MedicalKits() public view returns (MedicalKit[] memory){
         MedicalKit[] memory ret = new MedicalKit[](kit_count);
         for (uint i = 0; i < kit_count; i++) {
             ret[i] = MedicalKits[i];

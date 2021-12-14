@@ -1,4 +1,4 @@
-const hospital = artifacts.require("./hospital.sol");
+const hospital = artifacts.require("./RegisterationContract.sol");
 
 module.exports = function (deployer) {
   deployer.deploy(hospital);

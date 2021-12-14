@@ -20,6 +20,8 @@ contract hospital{
         string dob;
         string martial_status;
         string sex;
+        string qualification;
+        address AccountAddress;
     }
     struct Patient{
         uint _id;
@@ -32,6 +34,7 @@ contract hospital{
         string dob;
         string martial_status;
         string sex;
+        address AccountAddress;
     }
 
     struct _Appointment{
@@ -43,6 +46,12 @@ contract hospital{
         string Appointment_time;
         string Appointment_reason;
     }
+    
+    function Add_Doctor(string memory qualification,address AccAddress,string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email)  public {
+    doctor_count+=1;
+    Doctors[doctor_count]=Doctor(doctor_count,_firstName,_lastName, contact_num,emergency_num,_Address,email,dob,martial_status,sex,qualification,AccAddress);
+    }
+
      function hello() public pure returns (string memory){
         return "Test";
     }
@@ -51,13 +60,9 @@ contract hospital{
         Appointments[appointment_count]=_Appointment(appointment_count,doc_name,patient_name,doc_email,patient_email,Appoint_time,reason);
     }
 
-    function Register_patient(string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email) public{
+    function Register_patient(address Accaddress,string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email) public{
         patient_count+=1;
-        Patient_list[patient_count]=Patient(patient_count,_firstName,_lastName,contact_num,emergency_num,_Address,email,dob,martial_status,sex);
-    }
-    function Add_Doctor(string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email)  public {
-        doctor_count+=1;
-        Doctors[doctor_count]=Doctor(doctor_count,_firstName,_lastName,contact_num,emergency_num,_Address,email,dob,martial_status,sex);
+        Patient_list[patient_count]=Patient(patient_count,_firstName,_lastName,contact_num,emergency_num,_Address,email,dob,martial_status,sex,Accaddress);
     }
 
     function getAll_Doctors() public view returns (Doctor[] memory){
