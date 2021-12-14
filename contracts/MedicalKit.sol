@@ -28,6 +28,7 @@ contract kits{
         string nurse_email;
         string time_taken;
         string reason;
+        bytes32 photo_hash;
     }
 
     function Add_Nurse(address AccAddress,string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
@@ -35,11 +36,11 @@ contract kits{
         Nurses[nurse_count]=Nurse(nurse_count, _firstName, _lastName, contact_num, emergency_num, _Address, email, dob, martial_status, sex, AccAddress);
     }
 
-    function Get_MedicalKit(string memory Nurse_name, string memory time_taken, string memory reason, string memory nurse_email) public{
+    function Get_MedicalKit(bytes32 photohash,string memory Nurse_name, string memory time_taken, string memory reason, string memory nurse_email) public{
         if( kit_count > 0 ) {
             kit_count -= 1;
         }
-        MedicalKits[kit_count] = MedicalKit(kit_count, Nurse_name, nurse_email, time_taken, reason);
+        MedicalKits[kit_count] = MedicalKit(kit_count, Nurse_name, nurse_email, time_taken, reason,photohash);
     }
 
     function getAll_MedicalKits() public view returns (MedicalKit[] memory){
