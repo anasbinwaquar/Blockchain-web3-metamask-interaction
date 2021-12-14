@@ -47,7 +47,8 @@ contract hospital{
         string Appointment_reason;
     }
     
-    function Add_Doctor(string memory qualification,address AccAddress,string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email)  public {
+    function Add_Doctor(string memory qualification,address AccAddress,string memory dob,string memory sex,string memory martial_status,string memory _firstName, string memory _lastName,string memory emergency_num,string memory contact_num, string memory _Address,string memory email)  
+    public {
     doctor_count+=1;
     Doctors[doctor_count]=Doctor(doctor_count,_firstName,_lastName, contact_num,emergency_num,_Address,email,dob,martial_status,sex,qualification,AccAddress);
     }
@@ -55,7 +56,8 @@ contract hospital{
      function hello() public pure returns (string memory){
         return "Test";
     }
-    function Get_appointment(string memory doc_name,string memory patient_name,string memory Appoint_time,string memory reason,string memory doc_email,string memory patient_email) public{
+    function Get_appointment(string memory doc_name,string memory patient_name,string memory Appoint_time,string memory reason,string memory doc_email,string memory patient_email) 
+    public{
         appointment_count+=1;
         Appointments[appointment_count]=_Appointment(appointment_count,doc_name,patient_name,doc_email,patient_email,Appoint_time,reason);
     }
