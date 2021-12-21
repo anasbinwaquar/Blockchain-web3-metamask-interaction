@@ -28,7 +28,7 @@ contract Kit{
         string nurse_email;
         string time_taken;
         string reason;
-        bytes32 photo_hash;
+        address nurseAddress;
     }
 
     function Add_Nurse(string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
