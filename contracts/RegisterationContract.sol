@@ -67,11 +67,15 @@ contract RegisterationContract{
         patient_count+=1;
         Patient_list[patient_count]=Patient(patient_count,_firstName,_lastName,contact_num,emergency_num,_Address,email,dob,martial_status,sex,msg.sender);
     }
-    function GetDoctor(uint id) public returns(string[4] memory)
+    function GetDoctor(uint id) public returns(string memory fname,string memory lname,string memory qual,string memory contact)
     {
         Doctor memory p=Doctors[id];
-        // string memory arr=[memory p._firstName,p._lastName,p.qualification,p.Contact_number];
-        return (arr);
+        return (p._firstName,p._lastName,p.qualification,p.Contact_number);
+    }
+    function AppointmentInfo(uint id) public returns(string memory dname,string memory pname,string memory email,string memory time,string memory reason)
+    {
+        _Appointment memory app=Appointments[id];
+        return (app.Doctor_name,app.Patient_name,app.doc_email,app.Appointment_time,app.Appointment_reason);
     }
     function getAll_Doctors() public view returns (Doctor[] memory){
         Doctor[] memory ret = new Doctor[](doctor_count);

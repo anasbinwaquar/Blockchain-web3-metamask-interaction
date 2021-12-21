@@ -380,7 +380,12 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
           </div>
         </div>
       </li>
-
+      <div>
+        <li id="dfname">First name: </li>
+        <li id="dlname">Last name: </li>
+        <li id="dnum">Contact Number: </li>
+        <li id="dqual">Qualification: </li>
+      </div>
       <li style="display:none">
         Should be Empty:
         <input type="text" name="website" value="" />
@@ -410,25 +415,25 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
 
 <script>
   async function GetDoctor(){
+    document.getElementById("dfname").innerHTML = "First Name: ";
+    document.getElementById("dlname").innerHTML= "Last Name: ";
+    document.getElementById("dnum").innerHTML= "Contact Number: ";
+    document.getElementById("dqual").innerHTML= "Qualification: ";
     var id = $("#docid").val();
-
-
     const web3 = new Web3(window.ethereum);
     window.ethereum.enable();
     var contract = new web3.eth.Contract(abi, contractAddress);
     let accounts = await web3.eth.getAccounts()
     console.log(accounts[0]);
     console.log(contract.methods);
-    a=[]
-    a=contract.methods.GetDoctor(id).call();
-    window.alert(a);
-    for (i = 0; i < a.length; i++) {
-      console.log(a[i]);
-   }
-
-   output = JSON.stringify(a, null, 4);
-   console.log(output);
-    
+    var a;
+    var promise = Promise.resolve(contract.methods.GetDoctor(id).call());
+    promise.then(function(val) {
+      document.getElementById("dfname").innerHTML += val[0];
+      document.getElementById("dlname").innerHTML += val[1];
+      document.getElementById("dnum").innerHTML += val[2];
+      document.getElementById("dqual").innerHTML += val[3];
+    });
   } 
 
   async function RegisterDoctor(){

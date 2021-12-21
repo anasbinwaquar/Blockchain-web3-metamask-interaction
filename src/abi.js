@@ -1,4 +1,4 @@
-var abi= [
+var abi=  [
   {
     "inputs": [
       {
@@ -385,6 +385,45 @@ var abi= [
       {
         "internalType": "string",
         "name": "contact",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "AppointmentInfo",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "dname",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "pname",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "time",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "reason",
         "type": "string"
       }
     ],

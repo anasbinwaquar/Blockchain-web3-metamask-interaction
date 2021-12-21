@@ -394,6 +394,40 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
           </div>
         </div>
       </li>
+
+
+      <li class="form-line" data-type="control_address" id="id_4">
+        <label class="form-label form-label-left" id="label_4" for="input_4_addr_line1"> Appointment ID: </label>
+        <div id="cid_4" class="form-input" data-layout="full">
+          <div summary="" class="form-address-table jsTest-addressField">
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-street-line jsTest-address-lineField">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="docid" name="q4_address4[addr_line1]" class="form-textbox form-address-line" data-defaultvalue="" autoComplete="section-input_4 address-line1" value="" data-component="address_line_1" aria-labelledby="label_4 sublabel_4_addr_line1" required="" />
+                  <label class="form-sub-label" for="input_4_addr_line1" id="sublabel_4_addr_line1" style="min-height:13px" aria-hidden="false">  </label>
+                </span>
+              </span>
+            </div>
+
+        </div>
+      </li>
+
+      <li class="form-line" data-type="control_button" id="id_2">
+        <div id="cid_2" class="form-input-wide" data-layout="full">
+          <div data-align="auto" class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField">
+            
+          <button type="button" class="btn btn-primary" onclick="GetAppointment()"> Get Appointment info </button>
+          </div>
+        </div>
+      </li>
+      <div>
+        <li id="dname">Doctor Name: </li>
+        <li id="pname">Patient name: </li>
+        <li id="pemail">Email: </li>
+        <li id="time">Appointment time: </li>
+        <li id="reason">Appointment reason: </li>
+      </div>
+
       <li style="display:none">
         Should be Empty:
         <input type="text" name="website" value="" />
@@ -422,11 +456,37 @@ for (var i = 0; i < all_spc.length; i++)
 
 <script>
 
+  async function GetAppointment(){
+
+    document.getElementById("dname").innerHTML = "Doctor Name: ";
+    document.getElementById("pname").innerHTML= "Patient name: ";
+    document.getElementById("pemail").innerHTML= "Email: ";
+    document.getElementById("time").innerHTML= "Appointment time: ";
+    document.getElementById("reason").innerHTML= "Appointment reason: ";
+    var id = $("#docid").val();
+    const web3 = new Web3(window.ethereum);
+    window.ethereum.enable();
+    var contract = new web3.eth.Contract(abi, contractAddress);
+    let accounts = await web3.eth.getAccounts()
+    console.log(accounts[0]);
+    console.log(contract.methods);
+    var a;
+    var promise = Promise.resolve(contract.methods.AppointmentInfo(id).call());
+    promise.then(function(val) {
+      console.log(val)
+      document.getElementById("dname").innerHTML += val[0];
+      document.getElementById("pname").innerHTML +=  val[1];
+      document.getElementById("pemail").innerHTML +=  val[2];
+      document.getElementById("time").innerHTML +=  val[3];
+      document.getElementById("reason").innerHTML +=  val[4];
+    });
+  } 
   var accounts;
   function RegisterPatient(){
     var fname = $("#fname").val();
     var lname = $("#lname").val();
     var email = $("#email").val();
+    console.log(email);
     var address= $('#address').val();
     var sex= $('#sex').val();
     var contact_num= $('#contact_num').val();
@@ -447,7 +507,7 @@ for (var i = 0; i < all_spc.length; i++)
     console.log(accounts[0]);
 
     contract.methods.Register_patient(dob,sex,martial,fname,lname,emergency,contact_num,address,email).send({from: accounts[0]});
-    contract.methods.Get_appointment(doc_name,fname+lname,Appointment_time,appointment_reason,'XYZ',email).send({from:accounts[0]});
+    contract.methods.Get_appointment(doc_name,fname+lname,Appointment_time,appointment_reason,email,'XYZ').send({from:accounts[0]});
   } 
 
   function GetAllPatients(){
