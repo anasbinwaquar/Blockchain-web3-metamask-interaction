@@ -4,8 +4,8 @@ const hospital = artifacts.require("./RegisterationContract.sol");
 module.exports = function (deployer) {
   deployer.deploy(hospital);
 };
-// const Medical = artifacts.require("./MedicalKit.sol");
+const Medical = artifacts.require("./Kit.sol");
 
-// module.exports = function (deployer) {
-//   deployer.deploy(Medical);
-// };
+module.exports = function (deployer) {
+  deployer.deploy(Medical);
+};

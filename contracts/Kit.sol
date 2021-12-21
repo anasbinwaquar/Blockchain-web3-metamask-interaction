@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-contract kits{
+contract Kit{
     uint256 nurse_count = 0;
     uint256 kit_count = 10;
     mapping(uint => Nurse) public Nurses;
@@ -31,9 +31,9 @@ contract kits{
         bytes32 photo_hash;
     }
 
-    function Add_Nurse(address AccAddress,string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
+    function Add_Nurse(string memory dob, string memory sex, string memory martial_status, string memory _firstName, string memory _lastName, string memory emergency_num, string memory contact_num, string memory _Address, string memory email)  public {
         nurse_count += 1;
-        Nurses[nurse_count]=Nurse(nurse_count, _firstName, _lastName, contact_num, emergency_num, _Address, email, dob, martial_status, sex, AccAddress);
+        Nurses[nurse_count]=Nurse(nurse_count, _firstName, _lastName, contact_num, emergency_num, _Address, email, dob, martial_status, sex, msg.sender);
     }
 
     function Get_MedicalKit(bytes32 photohash,string memory Nurse_name, string memory time_taken, string memory reason, string memory nurse_email) public{
@@ -49,5 +49,5 @@ contract kits{
             ret[i] = MedicalKits[i];
         }
         return ret;
-    }    
+    }
 }
