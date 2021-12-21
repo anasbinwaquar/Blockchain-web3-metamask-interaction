@@ -301,6 +301,21 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
 
         </div>
       </li>
+      <li class="form-line" data-type="control_address" id="id_4">
+        <label class="form-label form-label-left" id="label_4" for="input_4_addr_line1"> Qualification: </label>
+        <div id="cid_4" class="form-input" data-layout="full">
+          <div summary="" class="form-address-table jsTest-addressField">
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-street-line jsTest-address-lineField">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="qual" name="q4_address4[addr_line1]" class="form-textbox form-address-line" data-defaultvalue="" autoComplete="section-input_4 address-line1" value="" data-component="address_line_1" aria-labelledby="label_4 sublabel_4_addr_line1" required="" />
+                  <label class="form-sub-label" for="input_4_addr_line1" id="sublabel_4_addr_line1" style="min-height:13px" aria-hidden="false">  </label>
+                </span>
+              </span>
+            </div>
+
+        </div>
+      </li>
       <li class="form-line" data-type="control_dropdown" id="id_232">
         <label class="form-label form-label-left" id="label_232" for="input_232"> Marital Status </label>
         <div id="cid_232" class="form-input" data-layout="half">
@@ -339,6 +354,33 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
           </div>
         </div>
       </li>
+
+
+      <li class="form-line" data-type="control_address" id="id_4">
+        <label class="form-label form-label-left" id="label_4" for="input_4_addr_line1"> Doctor ID: </label>
+        <div id="cid_4" class="form-input" data-layout="full">
+          <div summary="" class="form-address-table jsTest-addressField">
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-street-line jsTest-address-lineField">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="docid" name="q4_address4[addr_line1]" class="form-textbox form-address-line" data-defaultvalue="" autoComplete="section-input_4 address-line1" value="" data-component="address_line_1" aria-labelledby="label_4 sublabel_4_addr_line1" required="" />
+                  <label class="form-sub-label" for="input_4_addr_line1" id="sublabel_4_addr_line1" style="min-height:13px" aria-hidden="false">  </label>
+                </span>
+              </span>
+            </div>
+
+        </div>
+      </li>
+
+      <li class="form-line" data-type="control_button" id="id_2">
+        <div id="cid_2" class="form-input-wide" data-layout="full">
+          <div data-align="auto" class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField">
+            
+          <button type="button" class="btn btn-primary" onclick="GetDoctor()"> Get Doctor info </button>
+          </div>
+        </div>
+      </li>
+
       <li style="display:none">
         Should be Empty:
         <input type="text" name="website" value="" />
@@ -354,7 +396,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"newPatient","qid":"1","text":"New P
   <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="213383948887475" />
   <script type="text/javascript">
   var all_spc = document.querySelectorAll("form[id='213383948887475'] .si" + "mple" + "_spc");
-for (var i = 0; i < all_spc.length; i++)
+
+  for (var i = 0; i < all_spc.length; i++)
 {
   all_spc[i].value = "213383948887475-213383948887475";
 }
@@ -366,7 +409,27 @@ for (var i = 0; i < all_spc.length; i++)
 <script src="https://cdn.jotfor.ms//js/errorNavigation.js?v=3.3.29458"></script>
 
 <script>
+  async function GetDoctor(){
+    var id = $("#docid").val();
 
+
+    const web3 = new Web3(window.ethereum);
+    window.ethereum.enable();
+    var contract = new web3.eth.Contract(abi, contractAddress);
+    let accounts = await web3.eth.getAccounts()
+    console.log(accounts[0]);
+    console.log(contract.methods);
+    a=[]
+    a=contract.methods.GetDoctor(id).call();
+    window.alert(a);
+    for (i = 0; i < a.length; i++) {
+      console.log(a[i]);
+   }
+
+   output = JSON.stringify(a, null, 4);
+   console.log(output);
+    
+  } 
 
   async function RegisterDoctor(){
     var fname = $("#fname").val();
@@ -380,6 +443,7 @@ for (var i = 0; i < all_spc.length; i++)
     var bmonth=$('#bmonth').val();
     var bday= $('#bday').val();
     var byear= $('#byear').val();
+    var qual= $('#qual').val();
     var dob=bday+'-'+bmonth+'-'+byear;
 
 
@@ -389,8 +453,9 @@ for (var i = 0; i < all_spc.length; i++)
     let accounts = await web3.eth.getAccounts()
     console.log(accounts[0]);
     console.log(contract.methods);
+    
 
-    contract.methods.Add_Doctor(dob,sex,martial,fname,lname,emergency,contact_num,address,email).send({from: accounts[0]});
+    contract.methods.Add_Doctor(qual,dob,sex,martial,fname,lname,emergency,contact_num,address,email).send({from: accounts[0]});
     
   } 
 
@@ -407,7 +472,7 @@ for (var i = 0; i < all_spc.length; i++)
 
   
   window.addEventListener('load', async () => {
-  
+    
     var contract;
     const contractAddress = "0xD2aa303d4580B859Fd3acB6554aD90EbD9A1E120";
 

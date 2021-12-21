@@ -108,6 +108,16 @@ var abi= [
         "internalType": "string",
         "name": "sex",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "qualification",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "AccountAddress",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -173,11 +183,74 @@ var abi= [
         "internalType": "string",
         "name": "sex",
         "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "AccountAddress",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
     "type": "function",
     "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "qualification",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "dob",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "sex",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "martial_status",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_firstName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_lastName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "emergency_num",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "contact_num",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_Address",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      }
+    ],
+    "name": "Add_Doctor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -287,53 +360,34 @@ var abi= [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "GetDoctor",
+    "outputs": [
+      {
         "internalType": "string",
-        "name": "dob",
+        "name": "fname",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "sex",
+        "name": "lname",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "martial_status",
+        "name": "qual",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_firstName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_lastName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "emergency_num",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "contact_num",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_Address",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "email",
+        "name": "contact",
         "type": "string"
       }
     ],
-    "name": "Add_Doctor",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -392,9 +446,19 @@ var abi= [
             "internalType": "string",
             "name": "sex",
             "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "qualification",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "AccountAddress",
+            "type": "address"
           }
         ],
-        "internalType": "struct hospital.Doctor[]",
+        "internalType": "struct RegisterationContract.Doctor[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -458,9 +522,14 @@ var abi= [
             "internalType": "string",
             "name": "sex",
             "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "AccountAddress",
+            "type": "address"
           }
         ],
-        "internalType": "struct hospital.Patient[]",
+        "internalType": "struct RegisterationContract.Patient[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -511,7 +580,7 @@ var abi= [
             "type": "string"
           }
         ],
-        "internalType": "struct hospital._Appointment[]",
+        "internalType": "struct RegisterationContract._Appointment[]",
         "name": "",
         "type": "tuple[]"
       }

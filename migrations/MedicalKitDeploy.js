@@ -1,5 +1,5 @@
-const hospital = artifacts.require("./MedicalKit.sol");
+const Medical = artifacts.require("./MedicalKit.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(hospital);
+  deployer.deploy(Medical);
 };
